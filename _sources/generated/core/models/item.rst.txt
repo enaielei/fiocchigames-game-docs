@@ -1,0 +1,18 @@
+core.models.item
+================
+
+Classes
+-------
+
+.. class:: Item
+
+   Represents an in-game item with an identifier, name, and description.
+   
+   :ivar id: Unique identifier for the item.
+   :vartype id: Any
+   
+   :ivar name: Display name of the item.
+   :vartype name: str
+   
+   :ivar description: Description of what the item is or does.
+   :vartype description: str

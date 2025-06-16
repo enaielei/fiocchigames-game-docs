@@ -1,0 +1,48 @@
+Building the Documentation
+==========================
+
+This guide explains how to build the Sphinx documentation for the project.
+
+1. Generate RST Files from Game Scripts
+---------------------------------------
+
+If you've updated docstrings or added new modules inside the `game/` directory, run the `restruct.py` script to regenerate the corresponding `.rst` files under `docs/generated/`.
+
+You can view available options using:
+
+.. code-block:: bash
+
+   python restruct.py -h
+
+This step is only necessary if you've made changes in the game files or their documentation strings.
+
+2. Add Manual Documentation (Optional)
+--------------------------------------
+
+To include manually written guides or explanations, create new `.rst` files inside:
+
+.. code-block:: text
+
+   docs/manual/
+
+These files can be added to the table of contents in `docs/index.rst` using the `.. toctree::` directive.
+
+3. Build the HTML Documentation
+-------------------------------
+
+Use the `make` system to build the documentation:
+
+- **On Linux/macOS**:
+
+  .. code-block:: bash
+
+     docs/make html
+
+- **On Windows**:
+
+  .. code-block:: bat
+
+     docs/make.bat html
+
+The output will be generated inside the `_build/html/` directory. Open `index.html` in a browser to preview the docs.
+

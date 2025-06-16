@@ -1,0 +1,71 @@
+core.models.interactable
+========================
+
+Classes
+-------
+
+.. class:: Interactable
+
+   Represents any interactive element that can appear on the screen.
+   
+   This could be a character, object, or navigation point in a scene.
+   It supports type-specific metadata and action hooks.
+   
+   :ivar id: Unique identifier for the interactable.
+   :vartype id: Any
+   
+   :ivar location: The location this interactable belongs to.
+   :vartype location: Location
+   
+   :ivar name: The display name or label of the interactable.
+   :vartype name: str
+   
+   :ivar type: The type of interactable (navigator, actor, or actor item).
+   :vartype type: InteractableType
+   
+   :ivar locked: Whether this interactable is currently locked (i.e., not interactable).
+   :vartype locked: bool
+   
+   :ivar action: The callable or action reference to invoke when interacted with.
+   :vartype action: Callable
+   
+   :ivar metadata: Type-specific metadata associated with this interactable.
+   :vartype metadata: InteractableMetadata
+   
+   :ivar properties: Arbitrary displayable properties.
+   :vartype properties: dict
+
+.. class:: InteractableActorItemMetadata
+
+   Metadata for an interactable of type `ACTOR_ITEM`.
+   
+   :ivar actor_item: The actor item instance being referenced.
+   :vartype actor_item: ActorItem
+
+.. class:: InteractableActorMetadata
+
+   Metadata for an interactable of type `ACTOR`.
+   
+   :ivar actor: The actor instance this interactable refers to.
+   :vartype actor: Actor
+
+.. class:: InteractableMetadata
+
+   Base class for holding additional data about an `Interactable`.
+   
+   This class should be subclassed based on the type of interactable.
+
+.. class:: InteractableNavigatorMetadata
+
+   Metadata for an interactable of type `NAVIGATOR`.
+   
+   :ivar to: The target location or destination to navigate to.
+   :vartype to: Any
+
+.. class:: InteractableType
+
+   Enumeration of possible types of an `Interactable` object.
+   
+   :cvar NAVIGATOR: Represents a navigational element (e.g., scene transition).
+   :cvar ACTOR: Represents an actor that can be interacted with.
+   :cvar ACTOR_ITEM: Represents an item associated with an actor.

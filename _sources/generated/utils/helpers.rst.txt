@@ -1,0 +1,74 @@
+utils.helpers
+=============
+
+Functions
+---------
+
+.. function:: clamp()
+
+   Clamp a value between a minimum and maximum.
+   
+   :param value: The number to clamp.
+   :param min_: The minimum bound. Defaults to 0.
+   :param max_: The maximum bound. Defaults to 1.
+   :return: The clamped value.
+   :rtype: float | int
+
+.. function:: make_property()
+
+   Create a `property` object with optional custom getter, setter, and deleter.
+   
+   :param attr_name: The attribute name to get, set, or delete.
+   :param getter: A callable for retrieving the value. Defaults to `getattr`.
+   :param setter: A callable for setting the value. Defaults to `setattr`.
+   :param deleter: An optional callable for deleting the value.
+   :return: A `property` object configured with the given behavior.
+   :rtype: property
+   
+   :example:
+       >>> make_property('_value')
+
+.. function:: make_setter()
+
+   Create a setter that applies a transformation function before setting the value.
+   
+   :param function: A function to apply to the value before assignment.
+   :param args: Positional arguments to pass to the function.
+   :param kwargs: Keyword arguments to pass to the function.
+   :return: A setter callable with the signature (obj, name, value).
+   :rtype: Callable
+
+.. function:: represent()
+
+   Represent an object as a string of its class name and key properties.
+   
+   Format: `ClassName(prop1=value1, prop2=value2, ...)`
+   
+   :param obj: The object to represent.
+   :param props: Attribute names to include in the representation. The key name is used as-is.
+   :param props_and_names: Additional keyword arguments mapping object attribute names to
+                           custom display names in the output string.
+   :return: A string representation of the object.
+   :rtype: str
+   
+   :example:
+       >>> class Foo:
+       ...     def __init__(self):
+       ...         self.a = 1
+       ...         self.b = 2
+       ...     __repr__ = lambda self: represent(self, 'a', b='b')
+       >>> repr(Foo())
+       "Foo(a=1, b=2)"
+
+.. function:: to_pascal_case()
+
+   Convert a string into PascalCase.
+   
+   :param text: The input string to convert.
+   :param sep: The separator used to split the string. Defaults to underscore.
+   :return: A PascalCase version of the input.
+   :rtype: str
+   
+   :example:
+       >>> to_pascal_case("hello_world")
+       'HelloWorld'

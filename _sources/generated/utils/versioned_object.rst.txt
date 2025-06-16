@@ -1,0 +1,48 @@
+utils.versioned_object
+======================
+
+Classes
+-------
+
+.. class:: RevertableVersionedObject
+
+   A `renpy` object that supports both revertable behavior and version upgrades/downgrades.
+   
+   This class combines version management (from :class:`VersionedObject`) with `renpy`'s
+   revertable system (via `object` inheritance), making it suitable for storing complex
+   game state that evolves over time.
+   
+   Inherit from this class for objects that need to handle save/load state transitions
+   across different game versions.
+
+.. class:: VersionedObject
+
+   Extension of :class:`renpy.object.Object` that adds support for versioned state transitions.
+   
+   This class provides a structured way to handle version upgrades and downgrades for game objects
+   by implementing instance methods named `_v<number>` to define transition logic between versions.
+   
+   To use this system:
+   - Define class-level `__version__` as the current version of the object.
+   - Implement `_vN` methods (e.g., `_v1`, `_v2`, etc.) for each version you wish to transition from or to.
+   
+   The `__version__` should be incremented when:
+   1. A new instance attribute is added.
+   2. An existing attribute is removed.
+   3. An attribute's type is changed.
+   4. The contents of a collection-type attribute change structure or meaning.
+   
+   :cvar __version__: The current version number of the class.
+   :ivar _VERSION_METHOD_NAME_TEMPLATE: Format string used to generate version method names.
+   :vartype _VERSION_METHOD_NAME_TEMPLATE: str
+
+   .. method:: after_upgrade()
+
+      Executes upgrade or downgrade routines depending on the current object's version.
+      
+      For each required version transition, the corresponding `_v<number>` method will be called
+      with a single `upgrade` boolean argument.
+      
+      :param new_version: The target version to transition to.
+      :type new_version: int
+      :raises NotImplementedError: If a required version transition method is not implemented.

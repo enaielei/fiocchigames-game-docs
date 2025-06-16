@@ -1,0 +1,74 @@
+utils.properties_only
+=====================
+
+Classes
+-------
+
+.. class:: PropertiesOnly
+
+   A base class that only allows setting attributes defined as `property`.
+   
+   It enforces that only explicitly defined `property` attributes can be set,
+   unless the attribute is listed in `PROPERTIES_ONLY_EXCLUSION`.
+   
+   This is useful for ensuring all instance attributes are controlled via descriptors
+   (e.g., for validation or custom behavior).
+   
+   :cvar PROPERTIES_ONLY_EXCLUSION: Tuple of attribute names that bypass the property check.
+
+   .. method:: __init__()
+
+      Initialize the instance and set values for allowed property attributes.
+      
+      :param kwargs: A mapping of property names to values.
+      :raises AttributeError: If any keyword is not a property.
+
+   .. method:: __setattr__()
+
+      Set a property if it is allowed. Blocks setting unknown or undeclared attributes.
+      
+      :param name: The attribute name.
+      :type name: str
+      :param value: The value to assign.
+      :raises AttributeError: If the attribute is not a declared property.
+
+.. class:: Property
+
+   A descriptor that creates a `property` and adds its backing attribute name to an exclusion list.
+   
+   This descriptor is designed to integrate with the `PropertiesOnly` base class,
+   ensuring that only declared properties can be set. When assigned to a class attribute,
+   it replaces itself with a `property` unless the private name is explicitly set to `None`.
+   
+   :param private_name: The backing attribute name (e.g., `_value`). If not provided, defaults to `_<attr_name>`.
+                       If set to `None`, the property will not be created; only the attribute name will be excluded.
+   :type private_name: str or NOT_SET or None
+   :param getter: A custom getter function (defaults to `getattr`).
+   :type getter: Callable
+   :param setter: A custom setter function (defaults to `setattr`).
+   :type setter: Callable
+   :param deleter: Optional custom deleter function.
+   :type deleter: Callable or None
+   
+   :example:
+   
+   >>> class MyObject(PropertiesOnly):
+   ...     value = Property()  # Will create a property named 'value' backed by '_value'
+   ...     _internal = Property(None)  # Will not create a property, but '_internal' will be excluded
+   
+   In the example above:
+   - `value` becomes a proper Python property using `_value` as its internal storage.
+   - `_internal` is **not** made into a property, but is allowed to be set directly because it’s
+   added to `PROPERTIES_ONLY_EXCLUSION`.
+
+   .. method:: __set_name__()
+
+      Called by Python when the descriptor is assigned to a class attribute.
+      
+      Replaces the descriptor with a built-in `property`, unless `private_name` is None.
+      In that case, the name is simply excluded from `PropertiesOnly` enforcement.
+      
+      :param owner: The class to which the descriptor is being attached.
+      :type owner: type
+      :param name: The name of the attribute being defined.
+      :type name: str

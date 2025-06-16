@@ -1,0 +1,27 @@
+core.models.quest_prerequisite
+==============================
+
+Classes
+-------
+
+.. class:: QuestPrerequisite
+
+   Represents a prerequisite condition for a quest.
+   
+   :ivar id: Unique identifier for the prerequisite.
+   :vartype id: Any
+   
+   :ivar quest: Reference to the quest this prerequisite belongs to.
+   :vartype quest: Quest
+   
+   :ivar order: The order or sequence of the prerequisite in the quest flow.
+   :vartype order: int
+   
+   :ivar name: Name or title of the prerequisite.
+   :vartype name: str
+   
+   :ivar description: Description of what the prerequisite entails.
+   :vartype description: str
+   
+   :ivar completed: Flag indicating if the prerequisite has been completed.
+   :vartype completed: bool

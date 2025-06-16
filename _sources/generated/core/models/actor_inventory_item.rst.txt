@@ -1,0 +1,25 @@
+core.models.actor_inventory_item
+================================
+
+Classes
+-------
+
+.. class:: ActorInventoryItem
+
+   Represents an item currently held in an actor's inventory.
+   
+   This class links an :class:`ActorItem` to an :class:`Actor`, along with metadata
+   such as where the item came from and where it is intended to go. It is intended to be
+   used in inventory management systems to track item transfers and ownerships.
+   
+   :ivar id: The unique identifier for this inventory item instance.
+   :vartype id: Any
+   
+   :ivar from_: The source from which the item originated. Stored internally as ``_from``.
+   :vartype from_: Location
+   
+   :ivar to: The target destination or actor this item is moving or assigned to.
+   :vartype to: Location
+   
+   :ivar actor_item: The actual item reference.
+   :vartype actor_item: ActorItem

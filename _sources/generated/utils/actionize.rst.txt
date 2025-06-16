@@ -1,0 +1,43 @@
+utils.actionize
+===============
+
+Functions
+---------
+
+.. function:: _actionize_method()
+
+   Wrap a method as a Ren'Py `Function` action.
+   
+   This is a private helper used to transform a callable method into
+   a Ren'Py `Function` object, suitable for use as an action.
+   
+   :param method: The method to wrap.
+   :return: A callable that returns a `Function` object.
+   :rtype: Callable
+
+.. function:: actionize()
+
+   A class decorator to convert instance/class/static methods into Ren'Py actions.
+   
+   This decorator scans the class for methods by name, wraps them using Ren'Py's
+   `Function`, and rebinds them under PascalCase names (or custom names) to make
+   them usable as UI actions.
+   
+   :param methods: Method names to convert; the new attribute name will be the PascalCase version.
+   :param methods_and_names: Keyword arguments mapping method names to custom action names.
+   :return: The decorated class with added action-like attributes.
+   
+   :raises KeyError: If a method name is not found on the class.
+   :raises ValueError: If an attribute is not callable or a recognized method type.
+   
+   :example:
+   
+       >>> @actionize("save_game", reload_game="Reload")
+       ... class Game:
+       ...     def save_game(self): ...
+       ...     @staticmethod
+       ...     def reload_game(): ...
+       ...
+       >>> g = Game()
+       >>> g.SaveGame  # A Ren'Py action (Function)
+       >>> Game.Reload  # A staticmethod action

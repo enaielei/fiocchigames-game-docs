@@ -1,0 +1,40 @@
+.. Untitled Game documentation master file, created by
+   sphinx-quickstart on Mon Jun 16 12:10:17 2025.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Untitled Game documentation
+===========================
+
+Add your content using ``reStructuredText`` syntax. See the
+`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
+documentation for details.
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Getting Started
+
+   manual/setting_up_the_development_environment
+   manual/repository_structure
+   manual/building_the_documentation
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API Reference
+
+   generated/core/date_time
+   generated/core/models/actor
+   generated/core/models/actor_inventory_item
+   generated/core/models/actor_item
+   generated/core/models/interactable
+   generated/core/models/item
+   generated/core/models/location
+   generated/core/models/quest
+   generated/core/models/quest_prerequisite
+   generated/core/models/quest_step
+   generated/utils/actionize
+   generated/utils/helpers
+   generated/utils/number
+   generated/utils/properties_only
+   generated/utils/table
+   generated/utils/versioned_object

@@ -1,0 +1,88 @@
+core.date_time
+==============
+
+Classes
+-------
+
+.. class:: DateTime
+
+   Represents and manages an in-game datetime system with time-of-day cycling.
+   
+   Allows tracking of an initial datetime and a current one, calculation of elapsed time,
+   and provides cycling through time-of-day segments (morning, noon, evening, night).
+   
+   :param day_time: Optional initial time of day (can be a `DayTime` enum or int convertible to one).
+   :param hour: Hour component of the start datetime.
+   :param minute: Minute component of the start datetime.
+   :param second: Second component of the start datetime.
+   :param year: Year component of the start datetime.
+   :param month: Month component of the start datetime.
+   :param day: Day component of the start datetime.
+
+   .. attribute:: current
+
+      Get the current datetime.
+      
+      :return: A `datetime` object representing the current game time.
+
+   .. attribute:: day_time
+
+      Get the current time-of-day period.
+      
+      :return: A `DayTime` enum representing the current time segment.
+
+   .. attribute:: elapsed
+
+      Calculate the approximate elapsed time from the initial to the current datetime.
+      
+      :return: An `Elapsed` named tuple containing the duration in years, months,
+              days, hours, minutes, and seconds.
+
+   .. attribute:: elapsed_days
+
+      Calculate the total number of full days elapsed from initial to current datetime.
+      
+      :return: Number of elapsed days as an integer.
+
+   .. attribute:: initial
+
+      Get the initial datetime when the object was instantiated.
+      
+      :return: A `datetime` object representing the initial game time.
+
+   .. method:: __repr__()
+
+      Return a string representation of the DateTime object.
+      
+      :return: A string showing the current time-of-day, datetime, and elapsed time.
+
+   .. method:: cycle()
+
+      Cycle the time-of-day by the given number of steps.
+      
+      Cycles forward if `count` is positive, or backward if negative.
+      Adjusts the day if the cycle crosses over a day boundary.
+      
+      :param count: Number of times to cycle. Positive for forward, negative for backward.
+
+.. class:: DayTime
+
+   Represents times of day and their associated starting hours.
+   
+   The enum values correspond to the hour of the day when each period begins:
+   
+   - MORNING: 6 AM to 11:59 AM
+   - NOON: 12 PM to 12:59 PM
+   - EVENING: 1 PM to 8:59 PM
+   - NIGHT: 9 PM to 5:59 AM
+
+.. class:: Elapsed
+
+   Represents elapsed time between two datetime points.
+   
+   :ivar years: Number of whole years elapsed.
+   :ivar months: Number of whole months (approximate) elapsed.
+   :ivar days: Remaining days after accounting for years and months.
+   :ivar hours: Hours component of the elapsed time.
+   :ivar minutes: Minutes component of the elapsed time.
+   :ivar seconds: Seconds component of the elapsed time.

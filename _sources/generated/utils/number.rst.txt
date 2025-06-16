@@ -1,0 +1,100 @@
+utils.number
+============
+
+Classes
+-------
+
+.. class:: Number
+
+   A numerical object that supports clamping, normalization, and dynamic constraints.
+   
+   This class wraps a numeric value (`val`) with optional min and max bounds,
+   a normalization interface, and optional value processors.
+   
+   :param val: The initial value.
+   :type val: float
+   :param min_: Minimum allowed value (inclusive), default is 0.0.
+   :type min_: float or None
+   :param max_: Maximum allowed value (inclusive), default is 1.0.
+   :type max_: float or None
+   :param norm: A normalized value (between 0 and 1) to initialize from.
+   :type norm: float or None
+   :param processor: A function that transforms all input values (e.g. rounding).
+   :type processor: Callable[[float], float] or None
+   :param use_min: Whether to enforce the minimum bound.
+   :type use_min: bool
+   :param use_max: Whether to enforce the maximum bound.
+   :type use_max: bool
+
+   .. attribute:: max
+
+      The upper bound of the value.
+
+   .. attribute:: maximized
+
+      Whether the current value is at the maximum bound.
+
+   .. attribute:: min
+
+      The lower bound of the value.
+
+   .. attribute:: minimized
+
+      Whether the current value is at the minimum bound.
+
+   .. attribute:: norm
+
+      The normalized value between 0 and 1 based on the current min and max.
+      
+      :return: A float representing how far the current value is between min and max.
+      :rtype: float
+
+   .. attribute:: use_max
+
+      Whether the maximum bound is enforced.
+
+   .. attribute:: use_min
+
+      Whether the minimum bound is enforced.
+
+   .. attribute:: val
+
+      The clamped and optionally processed numeric value.
+
+   .. method:: __bool__()
+
+      Evaluate the truthiness of the value.
+
+   .. method:: __float__()
+
+      Convert the value to a float.
+
+   .. method:: __hash__()
+
+      Hash based on the internal value.
+
+   .. method:: __int__()
+
+      Convert the value to an integer.
+
+   .. method:: __repr__()
+
+      Return a string representation of the object with selected properties.
+
+   .. method:: __str__()
+
+      Return a string of the current value.
+
+   .. method:: copy()
+
+      Create a copy of the number with optional overridden attributes.
+      
+      :param val: Optional override for the value.
+      :param min_: Optional override for the minimum.
+      :param max_: Optional override for the maximum.
+      :param norm: Optional override for the normalized value.
+      :param processor: Optional override for the value processor.
+      :param use_min: Optional override for enforcing minimum.
+      :param use_max: Optional override for enforcing maximum.
+      :return: A new Number instance.
+      :rtype: Number

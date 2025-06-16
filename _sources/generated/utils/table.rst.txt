@@ -1,0 +1,87 @@
+utils.table
+===========
+
+Classes
+-------
+
+.. class:: Table
+
+   Implements basic Create, Read, and Delete (CRD) operations for in-memory object storage.
+   
+   This is a simplified table-like structure that stores objects in a list.
+   It omits the Update operation because objects are stored by reference and can be modified directly.
+   
+   :ivar type: The expected class/type of records stored in the table.
+   :vartype type: type
+   :ivar uniques: A list of field name groups that must be unique together.
+   :vartype uniques: list[tuple[str]]
+   :ivar _records: Internal list storing actual record objects.
+   :vartype _records: list
+
+   .. method:: __init__()
+
+      Initialize the table.
+      
+      :param records: Optional iterable of records to insert initially.
+      :type records: Optional[Iterable]
+      :param kwargs: Additional fields set via properties.
+
+   .. method:: __iter__()
+
+      Return an iterator over all stored records.
+      
+      :return: Iterator over records.
+      :rtype: Iterator
+
+   .. method:: __len__()
+
+      Return the number of records in the table.
+      
+      :return: Number of records.
+      :rtype: int
+
+   .. method:: delete()
+
+      Delete all records that match the given field values.
+      
+      :param kwargs: Field-value filters.
+
+   .. method:: get()
+
+      Return the first record that matches the given field values.
+      
+      :param kwargs: Field-value filters.
+      :return: The first matching record, if any.
+      :rtype: Optional[object]
+
+   .. method:: get_unique()
+
+      Check if the given record violates any defined uniqueness constraints.
+      
+      :param record: The record to validate.
+      :type record: object
+      :return: Dictionary of matching field values if conflict exists, else None.
+      :rtype: Optional[dict]
+
+   .. method:: insert()
+
+      Insert one or more records into the table.
+      
+      :param record: The first record to insert.
+      :type record: object
+      :param records: Additional records to insert.
+      :type records: object
+      :raises ValueError: If the type of a record doesn't match the expected `type`.
+      :raises KeyError: If a record is already present or violates uniqueness constraints.
+
+   .. method:: select()
+
+      Select records matching a condition or field values.
+      
+      :param condition: A callable that returns True for records to include.
+      :type condition: Optional[Callable]
+      :param limit: Maximum number of records to return.
+      :type limit: Optional[int]
+      :param kwargs: Field-value equality filters (e.g., `id=5`).
+      :return: List of matching records.
+      :rtype: list

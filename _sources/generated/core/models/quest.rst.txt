@@ -1,0 +1,54 @@
+core.models.quest
+=================
+
+Classes
+-------
+
+.. class:: Quest
+
+   Represents a quest that can be accepted and completed by a character or actor.
+   
+   :ivar id: Unique identifier of the quest.
+   :vartype id: Any
+   
+   :ivar owner: The entity that owns or offers this quest.
+   :vartype owner: Actor
+   
+   :ivar name: The name of the quest.
+   :vartype name: str
+   
+   :ivar description: A description detailing the quest’s objective or story.
+   :vartype description: str
+   
+   :ivar available: Whether the quest is currently available to be accepted.
+   :vartype available: bool
+   
+   :ivar accepted: Whether the quest was accepted. ``None`` if not responded, ``True`` if accepted, ``False`` if rejected.
+   :vartype accepted: Optional[bool]
+   
+   :ivar status: The current status of the quest.
+   :vartype status: QuestStatus
+   
+   :ivar state: Internal state representation of the quest.
+   :vartype state: QuestState
+
+.. class:: QuestState
+
+   Represents the current state or progress of a quest.
+   
+   This class is meant to store data that reflects the step-by-step
+   progression of a quest, such as completed steps, failed attempts,
+   or other relevant flags or metadata related to the execution of a quest.
+   
+   Extend this class with properties that define how your quests track state.
+
+.. class:: QuestStatus
+
+   Represents the current status of a quest.
+   
+   :cvar FAILED_PREREQUISITES: Quest cannot be started due to unmet prerequisites.
+   :cvar NOT_STARTED: All prerequisites met but the quest has not been accepted or rejected yet.
+   :cvar REJECTED: The quest was offered but was explicitly rejected.
+   :cvar IN_PROGRESS: The quest has been accepted and is currently being undertaken.
+   :cvar COMPLETED: The quest has been successfully completed.
+   :cvar FAILED: The quest was started but failed during one of its steps.

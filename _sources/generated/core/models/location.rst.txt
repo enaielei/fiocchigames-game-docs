@@ -1,0 +1,21 @@
+core.models.location
+====================
+
+Classes
+-------
+
+.. class:: Location
+
+   Represents a location in the game world.
+   
+   :ivar id: Unique identifier for the location.
+   :vartype id: Any
+   
+   :ivar name: Display name of the location.
+   :vartype name: str
+   
+   :ivar locked: Whether the location is currently inaccessible or locked.
+   :vartype locked: bool
+   
+   :ivar image: Visual representation or background image for the location.
+   :vartype image: str or Any

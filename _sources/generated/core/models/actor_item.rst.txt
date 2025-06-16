@@ -1,0 +1,26 @@
+core.models.actor_item
+======================
+
+Classes
+-------
+
+.. class:: ActorItem
+
+   Represents an item that belongs to an actor in the game world.
+   
+   This class associates a specific item with an actor and provides context
+   about where the item is currently located. It serves as a relational link
+   between the owning actor and the item itself, allowing for inventory tracking,
+   item usage, or location-based logic.
+   
+   :ivar id: The unique identifier of this actor item instance.
+   :vartype id: Any
+   
+   :ivar actor: The owner of this item, typically an instance of :class:`Actor`.
+   :vartype actor: Actor
+   
+   :ivar item: The actual item being referenced.
+   :vartype item: Item
+   
+   :ivar location: The current location of the item, which may differ from the actor's.
+   :vartype location: Location

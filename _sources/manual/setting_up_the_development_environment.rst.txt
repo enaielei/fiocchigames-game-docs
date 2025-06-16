@@ -1,0 +1,112 @@
+Setting Up the Development Environment
+======================================
+
+Follow these steps to set up your local development environment for the project.
+
+1. Clone the Repository
+------------------------
+
+Clone the source code from GitHub:
+
+.. code-block:: bash
+
+   git clone https://github.com/fiocchigames/game.git
+   cd game
+
+2. Install Python
+-----------------
+
+Install a compatible version of Python. Refer to the ``requirements.txt`` file to determine the recommended version.  
+Use a version manager like `pyenv <https://github.com/pyenv/pyenv>`_ (Linux/macOS) or the `official Python installer <https://www.python.org/downloads/>`_ for Windows.
+
+3. Create a Virtual Environment
+-------------------------------
+
+Inside the project directory, create a virtual environment:
+
+.. code-block:: bash
+
+   python -m venv .venv
+
+4. Activate the Virtual Environment
+-----------------------------------
+
+Activate the virtual environment based on your operating system:
+
+- **Windows** (CMD):
+
+  .. code-block:: bat
+
+     .venv\Scripts\activate
+
+- **Windows** (PowerShell):
+
+  .. code-block:: powershell
+
+     .venv\Scripts\Activate.ps1
+
+- **macOS/Linux**:
+
+  .. code-block:: bash
+
+     source .venv/bin/activate
+
+5. Install Python Dependencies
+------------------------------
+
+Install the required Python packages:
+
+.. code-block:: bash
+
+   pip install -r requirements.txt
+
+6. Install the Ren'Py SDK
+-------------------------
+
+Download and install the `Ren'Py SDK <https://www.renpy.org/latest.html>`_ appropriate for your platform.
+As of writing, the game is currently being developed using Ren'Py 8.3.7.
+
+7. Set Project Directory in Ren'Py Launcher
+-------------------------------------------
+
+Open the Ren'Py Launcher and set the parent folder of the ``game/`` directory as your **Projects Directory**.
+
+For example, if your project is at:
+
+.. code-block:: text
+
+   C:\Users\you\dev\game
+
+then set:
+
+.. code-block:: text
+
+   C:\Users\you\dev
+
+as the Projects Directory in the launcher.
+
+8. Launch the Project from Ren'Py
+---------------------------------
+
+Once the launcher detects the project, select it from the list and click **Launch Project**. This will start the game in development mode.
+
+9. Install Hygen for Code Generation
+------------------------------------
+
+This project uses `Hygen <https://www.hygen.io/>`_ for consistent code scaffolding. To install it globally:
+
+.. code-block:: bash
+
+   npm install -g hygen
+
+Once installed, you can use the templates defined in the ``_templates/`` directory to generate new files. For example:
+
+.. code-block:: bash
+
+   hygen <generator> <action>
+
+Run this in the project root. To see all available generators:
+
+.. code-block:: bash
+
+   ls _templates

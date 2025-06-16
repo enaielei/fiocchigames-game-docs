@@ -1,0 +1,28 @@
+core.models.quest_step
+======================
+
+Classes
+-------
+
+.. class:: QuestStep
+
+   Represents a single step in a quest sequence.
+   
+   :ivar id: Unique identifier for the quest step.
+   :vartype id: Any
+   
+   :ivar quest: Reference to the quest this step belongs to.
+   :vartype quest: Quest
+   
+   :ivar order: The sequence order of this step within the quest.
+   :vartype order: int
+   
+   :ivar name: Name or title of the step.
+   :vartype name: str
+   
+   :ivar description: Description of what needs to be done in this step.
+   :vartype description: str
+   
+   :ivar completed: Completion status of the step.
+                   ``None`` if not yet done, ``False`` if failed, ``True`` if succeeded.
+   :vartype completed: Optional[bool]

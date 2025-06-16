@@ -1,0 +1,42 @@
+core.models.actor
+=================
+
+Classes
+-------
+
+.. class:: Actor
+
+   Represents a character in the game world.
+   
+   This class encapsulates the core attributes of an actor such as identity, location,
+   type, and current state. It provides a structured representation of both main and
+   supporting characters.
+   
+   :ivar id: The unique identifier of the actor.
+   :vartype id: Any
+   
+   :ivar name: The display name of the actor.
+   :vartype name: str
+   
+   :ivar type: The type of the actor (main or side).
+   :vartype type: ActorType
+   
+   :ivar location: The current location of the actor.
+   :vartype location: Location
+   
+   :ivar state: The current state of the actor, including flags and stats.
+   :vartype state: ActorState
+
+.. class:: ActorState
+
+   Holds dynamic state information for an actor, such as stats, flags, and status.
+   
+   This is designed to encapsulate all modifiable runtime data that affects the actor's
+   behavior or role in the game (e.g., health, experience, quest flags, etc.).
+
+.. class:: ActorType
+
+   Enumeration of possible actor types in the game.
+   
+   :cvar MAIN: The main character of the story.
+   :cvar SIDE: A secondary or supporting character.
